@@ -1481,7 +1481,11 @@ module Yast
         return false
       end
 
-      if !AddOnProduct.AcceptedLicenseAndInfoFile(src_id)
+      Wizard.OpenNextBackDialog
+      license_accepted = AddOnProduct.AcceptedLicenseAndInfoFile(src_id)
+      Wizard.CloseDialog
+
+      if !license_accepted
         Pkg.SourceDelete(src_id)
         return false
       end

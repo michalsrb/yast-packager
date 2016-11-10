@@ -1143,7 +1143,10 @@ module Yast
       product_name = products[0]["short_name"] || _("Unknown Product")
       Builtins.y2milestone("Integrating release notes for product %1", product_name)
 
+      Wizard.OpenNextBackDialog
       WFM.CallFunction("inst_download_release_notes")
+      Wizard.CloseDialog
+
       # fallback - RN from media
       if InstData.release_notes[product_name].nil?
         Builtins.y2milestone("Getting on-line release notes failed, getting them from media")
